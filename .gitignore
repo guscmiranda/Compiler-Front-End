@@ -1,0 +1,15 @@
+# Compilação
+*.o
+*.out
+*.exe
+
+# Pastas de build
+build/
+bin/
+
+# VS Code
+.vscode/
+
+# Sistema
+.DS_Store
+Thumbs.db
