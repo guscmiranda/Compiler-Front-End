@@ -1,0 +1,1 @@
+// Aqui vamos fazer a implementação do lexer, que é responsável por ler o código fonte e gerar os tokens.
