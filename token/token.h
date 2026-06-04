@@ -2,7 +2,9 @@
 #define TOKEN_H
 
 typedef enum // enum já atribui valores de 0 em diante automaticamente
-{
+{   
+    TK_NULO,
+
     TK_TIPO,
     TK_PROGRAMA,
     TK_ID,
@@ -10,9 +12,9 @@ typedef enum // enum já atribui valores de 0 em diante automaticamente
     TK_PARENTESE_FECHA,
     TK_INICIO,
     TK_FIM,
-    TK_2PTS,
-    TK_PVIRG,
-    TK_VIRG,
+    TK_DOIS_PONTOS,
+    TK_PONTO_VIRGULA,
+    TK_VIRGULA,
     TK_ATRIBUICAO,
     TK_OP_ADI,
     TK_OP_SUB,
@@ -32,8 +34,8 @@ typedef enum // enum já atribui valores de 0 em diante automaticamente
     TK_RELOP,
     TK_PARA,
     TK_PASSO,
-    // TK_COMENTARIO,
-    // TK_SEPARADOR, comentário e separador são ignorados
+    TK_COMENTARIO,
+    TK_SEPARADOR, // comentário e separador são ignorados
     NUM_TOKENS
 } TokenType;
 
