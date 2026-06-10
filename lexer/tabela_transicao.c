@@ -5,57 +5,61 @@ Estado tabela_transicao[N_ESTADOS][NUM_CLASSES];
 TokenType estado_final[N_ESTADOS];
 int estado_lookahead[N_ESTADOS] = {0};
 
-int is_alpha(char c){
+int is_alpha(char c)
+{
     return (c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z');
 }
 
-int is_digit(char c){
+int is_digit(char c)
+{
     return (c >= '0' && c <= '9');
 }
 
-int isSeparador(char c){
+int isSeparador(char c)
+{
     return (c == ' ' || c == '\n' || c == '\t');
 }
 
-void inicializa_tabela(){
+void inicializa_tabela()
+{
 
-    for(int i=0;i<N_ESTADOS;i++)
-        for(int j=0;j<NUM_CLASSES;j++)
+    for (int i = 0; i < N_ESTADOS; i++)
+        for (int j = 0; j < NUM_CLASSES; j++)
             tabela_transicao[i][j] = ST_ERRO;
 
     /* Estado A */
-    tabela_transicao[ST_A][CLS_LETRA]      = ST_B;
-    tabela_transicao[ST_A][CLS_UNDERLINE]  = ST_B;
-    tabela_transicao[ST_A][CLS_ABRE_PAR]   = ST_C;
-    tabela_transicao[ST_A][CLS_FECHA_PAR]  = ST_D;
-    tabela_transicao[ST_A][CLS_DOIS_PONTOS]= ST_E;
-    tabela_transicao[ST_A][CLS_VIRGULA]    = ST_F;
-    tabela_transicao[ST_A][CLS_MAIS]       = ST_G;
-    tabela_transicao[ST_A][CLS_ASTERISCO]  = ST_H;
-    tabela_transicao[ST_A][CLS_APOSTROFO]  = ST_I;
-    tabela_transicao[ST_A][CLS_DIGITO]     = ST_J;
+    tabela_transicao[ST_A][CLS_LETRA] = ST_B;
+    tabela_transicao[ST_A][CLS_UNDERLINE] = ST_B;
+    tabela_transicao[ST_A][CLS_ABRE_PAR] = ST_C;
+    tabela_transicao[ST_A][CLS_FECHA_PAR] = ST_D;
+    tabela_transicao[ST_A][CLS_DOIS_PONTOS] = ST_E;
+    tabela_transicao[ST_A][CLS_VIRGULA] = ST_F;
+    tabela_transicao[ST_A][CLS_MAIS] = ST_G;
+    tabela_transicao[ST_A][CLS_ASTERISCO] = ST_H;
+    tabela_transicao[ST_A][CLS_APOSTROFO] = ST_I;
+    tabela_transicao[ST_A][CLS_DIGITO] = ST_J;
     tabela_transicao[ST_A][CLS_PONTO_VIRGULA] = ST_K;
-    tabela_transicao[ST_A][CLS_IGUAL]      = ST_L;
-    tabela_transicao[ST_A][CLS_MENOS]      = ST_M;
-    tabela_transicao[ST_A][CLS_BARRA]      = ST_N;
-    tabela_transicao[ST_A][CLS_MENOR]      = ST_O;
-    tabela_transicao[ST_A][CLS_MAIOR]      = ST_P;
-    tabela_transicao[ST_A][CLS_Ee]         = ST_B;
-    tabela_transicao[ST_A][CLS_SEPARADOR]  = ST_AI;
+    tabela_transicao[ST_A][CLS_IGUAL] = ST_L;
+    tabela_transicao[ST_A][CLS_MENOS] = ST_M;
+    tabela_transicao[ST_A][CLS_BARRA] = ST_N;
+    tabela_transicao[ST_A][CLS_MENOR] = ST_O;
+    tabela_transicao[ST_A][CLS_MAIOR] = ST_P;
+    tabela_transicao[ST_A][CLS_Ee] = ST_B;
+    tabela_transicao[ST_A][CLS_SEPARADOR] = ST_AI;
 
     /* Estado B */
-    for(int c=0;c<NUM_CLASSES;c++)
+    for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_B][c] = ST_Q;
 
-    tabela_transicao[ST_B][CLS_LETRA]     = ST_B;
+    tabela_transicao[ST_B][CLS_LETRA] = ST_B;
     tabela_transicao[ST_B][CLS_UNDERLINE] = ST_B;
-    tabela_transicao[ST_B][CLS_DIGITO]    = ST_B;
-    tabela_transicao[ST_B][CLS_Ee]        = ST_B;
+    tabela_transicao[ST_B][CLS_DIGITO] = ST_B;
+    tabela_transicao[ST_B][CLS_Ee] = ST_B;
 
-    /* Estados C D E F G são de aceitação*/ 
+    /* Estados C D E F G são de aceitação*/
 
     /* Estado q0 */
-    for(int c=0;c<NUM_CLASSES;c++)
+    for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_q0][c] = ST_H;
 
     tabela_transicao[ST_q0][CLS_ASTERISCO] = ST_R;
@@ -63,70 +67,68 @@ void inicializa_tabela(){
     /* Estado H é de aceitação */
 
     /* Estado I */
-    for(int c=0;c<NUM_CLASSES;c++)
+    for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_I][c] = ST_AJ;
 
     tabela_transicao[ST_I][CLS_APOSTROFO] = ST_ERRO;
 
     /* Estado J */
-    for(int c=0;c<NUM_CLASSES;c++)
+    for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_J][c] = ST_T;
 
-    tabela_transicao[ST_J][CLS_DIGITO] = ST_J;  
-    tabela_transicao[ST_J][CLS_Ee] = ST_AB;  
-    tabela_transicao[ST_J][CLS_PONTO] = ST_S;  
+    tabela_transicao[ST_J][CLS_DIGITO] = ST_J;
+    tabela_transicao[ST_J][CLS_Ee] = ST_AB;
+    tabela_transicao[ST_J][CLS_PONTO] = ST_S;
 
     /* Estado K é de aceitação */
 
     /* Estado q1 */
-    for(int c=0;c<NUM_CLASSES;c++)
+    for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_q1][c] = ST_L;
 
-    tabela_transicao[ST_q1][CLS_IGUAL] = ST_U;  
+    tabela_transicao[ST_q1][CLS_IGUAL] = ST_U;
 
     /* Estados L M são de aceitação */
 
     /* Estado q2 */
-    for(int c=0;c<NUM_CLASSES;c++)
+    for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_q2][c] = ST_N;
 
-    tabela_transicao[ST_q2][CLS_ASTERISCO] = ST_AF;  
+    tabela_transicao[ST_q2][CLS_ASTERISCO] = ST_AF;
 
     /* Estado N é de aceitação */
 
     /* Estado O */
-    for(int c=0;c<NUM_CLASSES;c++)
+    for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_O][c] = ST_X;
 
-    tabela_transicao[ST_O][CLS_IGUAL] = ST_V; 
+    tabela_transicao[ST_O][CLS_IGUAL] = ST_V;
     tabela_transicao[ST_O][CLS_MAIOR] = ST_W;
-    
+
     /* Estado P */
-    for(int c=0;c<NUM_CLASSES;c++)
+    for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_P][c] = ST_Z;
 
     tabela_transicao[ST_P][CLS_IGUAL] = ST_Y;
 
     /* Estados Q R são de aceitação  */
 
-
     /* Estado S */
     tabela_transicao[ST_S][CLS_DIGITO] = ST_AA;
 
     /* Estados T U V W X Y Z são de aceitação */
 
-
     /* Estado AA */
-    for(int c=0;c<NUM_CLASSES;c++)
-        tabela_transicao[ST_AA][c]  = ST_AC;
+    for (int c = 0; c < NUM_CLASSES; c++)
+        tabela_transicao[ST_AA][c] = ST_AC;
 
     tabela_transicao[ST_AA][CLS_DIGITO] = ST_AA;
-    tabela_transicao[ST_AA][CLS_Ee]     = ST_AB;
+    tabela_transicao[ST_AA][CLS_Ee] = ST_AB;
 
     /* Estado AB */
     tabela_transicao[ST_AB][CLS_DIGITO] = ST_AE;
-    tabela_transicao[ST_AB][CLS_MAIS]   = ST_AD;
-    tabela_transicao[ST_AB][CLS_MENOS]  = ST_AD;
+    tabela_transicao[ST_AB][CLS_MAIS] = ST_AD;
+    tabela_transicao[ST_AB][CLS_MENOS] = ST_AD;
 
     /* Estado AC de aceitação */
 
@@ -134,28 +136,28 @@ void inicializa_tabela(){
     tabela_transicao[ST_AD][CLS_DIGITO] = ST_AE;
 
     /* Estado AE */
-    for(int c=0;c<NUM_CLASSES;c++)
-        tabela_transicao[ST_AE][c]  = ST_AC;
+    for (int c = 0; c < NUM_CLASSES; c++)
+        tabela_transicao[ST_AE][c] = ST_AC;
 
     tabela_transicao[ST_AE][CLS_DIGITO] = ST_AE;
 
     /* Estado AF */
-    for(int c=0;c<NUM_CLASSES;c++)
-        tabela_transicao[ST_AF][c]  = ST_AF;
+    for (int c = 0; c < NUM_CLASSES; c++)
+        tabela_transicao[ST_AF][c] = ST_AF;
 
     tabela_transicao[ST_AF][CLS_ASTERISCO] = ST_AG;
 
     /* Estado AG */
-    for(int c=0;c<NUM_CLASSES;c++)
-        tabela_transicao[ST_AG][c]  = ST_AF;
+    for (int c = 0; c < NUM_CLASSES; c++)
+        tabela_transicao[ST_AG][c] = ST_AF;
 
     tabela_transicao[ST_AF][CLS_BARRA] = ST_AH;
 
     /* Estado H é de aceitação */
 
     /* Estado AI */
-    for(int c=0;c<NUM_CLASSES;c++)
-        tabela_transicao[ST_AI][c]  = ST_AL;
+    for (int c = 0; c < NUM_CLASSES; c++)
+        tabela_transicao[ST_AI][c] = ST_AL;
 
     tabela_transicao[ST_AI][CLS_SEPARADOR] = ST_AI;
 
@@ -165,8 +167,14 @@ void inicializa_tabela(){
     /* Estados AK AL são de aceitação */
 }
 
-void inicializa_finais(){
-    for(int i=0;i<N_ESTADOS;i++)
+Estado move(int estado, int classe)
+{
+    return tabela_transicao[estado][classe];
+}
+
+void inicializa_finais()
+{
+    for (int i = 0; i < N_ESTADOS; i++)
         estado_final[i] = TK_NULO;
 
     estado_final[ST_C] = TK_PARENTESE_ABRE;
@@ -190,13 +198,19 @@ void inicializa_finais(){
     estado_final[ST_Z] = TK_RELOP; // >
 
     estado_final[ST_AC] = TK_NUM; // FLOAT
-    estado_final[ST_AH] = TK_COMENTARIO; 
+    estado_final[ST_AH] = TK_COMENTARIO;
     estado_final[ST_AK] = TK_CHAR_CONTEUDO;
     estado_final[ST_AL] = TK_SEPARADOR;
 }
 
-void inicializa_lookahead(){
-    
+int is_estado_final(int estado)
+{
+    return estado_final[estado] != TK_NULO;
+}
+
+void inicializa_lookahead()
+{
+
     estado_lookahead[ST_Q] = 1;
     estado_lookahead[ST_H] = 1;
     estado_lookahead[ST_T] = 1;
@@ -206,14 +220,27 @@ void inicializa_lookahead(){
     estado_lookahead[ST_X] = 1;
     estado_lookahead[ST_Z] = 1;
     estado_lookahead[ST_AL] = 1;
-
-    for(int i=0; i<N_ESTADOS; i++)
-        printf("%d ", estado_lookahead[i]);
-
 }
 
-ClasseEntrada classifica_caractere(char entrada) {
+int needs_lookahead(int estado)
+{
+    return estado_lookahead[estado];
+}
 
+Estado estado_inicial()
+{
+    return ST_A;
+}
+
+void inicializa_tabela_transicao()
+{
+    inicializa_tabela();
+    inicializa_finais();
+    inicializa_lookahead();
+}
+
+ClasseEntrada classifica_caractere(char entrada)
+{
 
     if (entrada == 'e' || entrada == 'E')
         return CLS_Ee;
@@ -273,11 +300,4 @@ ClasseEntrada classifica_caractere(char entrada) {
         return CLS_SEPARADOR;
 
     return CLS_OUTROS;
-}
-
-int main(){
-    
-    inicializa_lookahead();
-
-    return 0;
 }

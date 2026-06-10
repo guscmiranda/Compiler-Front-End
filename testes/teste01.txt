@@ -1,1 +1,45 @@
-// Vai ter um código aleatório aqui
+int programa ()
+    inicio
+        
+        /* declarações de variáveis */
+        
+        int x, y, z, i;
+        float a, b, c;
+        char c;
+        
+        /* expressões aritméticas */
+        
+        x = 3 / 2;
+        y = c**2;
+        a = 5.3;
+        b = 0.1E-2;
+        c = 'A';
+        
+        /* comandos de seleção */
+        
+        se(1 < 2) então
+            z = 1;
+        e_se(1==1) então
+            inicio
+                z= 2;
+            fim
+        senao
+            c = 'a';
+
+        /* comandos de repetição */
+        
+        enquanto(x <> 1) faca
+            inicio
+                char z = 'c';
+            fim
+
+        repita
+            x = x + 1;
+        ate (x > 10);
+
+
+        para i = 0 ate 5 passo + 1
+            inicio
+                b = b + 1;
+            fim
+    fim

@@ -10,9 +10,12 @@ seria uma matriz de estados x entradas, onde cada célula indica o próximo esta
 
 #include "../token/token.h"
 
+#ifndef TABELA_TRANSICAO_H
+#define TABELA_TRANSICAO_H
 
-typedef enum {
-    CLS_LETRA,          // excluindo Ee
+typedef enum
+{
+    CLS_LETRA, // excluindo Ee
     CLS_UNDERLINE,
     CLS_ABRE_PAR,
     CLS_FECHA_PAR,
@@ -32,12 +35,13 @@ typedef enum {
     CLS_Ee,
     CLS_SEPARADOR,
     CLS_OUTROS,
-    
+
     NUM_CLASSES,
-    
+
 } ClasseEntrada;
 
-typedef enum {
+typedef enum
+{
     ST_A,
     ST_B,
     ST_C,
@@ -87,9 +91,12 @@ typedef enum {
 
 #define N_ESTADOS NUM_ESTADOS + 1
 
-int is_alpha(char c);
-int is_digit(char c);
-int isSeparador(char c);
-void inicializa_tabela();
+void inicializa_tabela_transicao();
+Estado estado_inicial();
+Estado move(int estado, int classe);
+int is_estado_final(int estado);
+int needs_lookahead(int estado);
 
 ClasseEntrada classifica_caractere(char entrada);
+
+#endif // TABELA_TRANSICAO_
