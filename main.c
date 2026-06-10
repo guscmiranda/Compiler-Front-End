@@ -34,6 +34,9 @@ int main()
         }
     }
     // Aqui devemos chamar as acoes de acordo com o estado final alcançado.
+    printf("%d", token_final(s));
+
+    // se for ID, tem que verificar se o lexema pertence à tabela de palvras reservadas
 
     fclose(arquivo);
 
