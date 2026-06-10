@@ -23,7 +23,6 @@ int main()
         char c = fgetc(arquivo);
 
         ClasseEntrada classe = classifica_caractere(c);
-        // s = tabela_transicao[s][classe];
         s = move(s, classe);
 
         if (s == ST_ERRO)
