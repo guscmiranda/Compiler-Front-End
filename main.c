@@ -15,25 +15,13 @@ int main()
         printf("Arquivo lido com sucesso\n");
     }
 
-    inicializa_tabela_transicao();
-    Estado s = estado_inicial();
-
-    while (!is_estado_final(s))
-    {
-        char c = fgetc(arquivo);
-
-        ClasseEntrada classe = classifica_caractere(c);
-        s = move(s, classe);
-
-        if (s == ST_ERRO)
-        {
-            fprintf(stderr, "Erro léxico: caractere '%c' não esperado.\n", c);
-            fclose(arquivo);
-            return 1;
-        }
+    // inicializa_tabela_transicao();
+    inicializa_lexer(arquivo);
+    int i = 0;
+    while(i < 20){
+        get_next_token();
+        i++;
     }
-    // Aqui devemos chamar as acoes de acordo com o estado final alcançado.
-    printf("%d", token_final(s));
 
     // se for ID, tem que verificar se o lexema pertence à tabela de palvras reservadas
 
