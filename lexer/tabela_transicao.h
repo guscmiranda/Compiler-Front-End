@@ -100,4 +100,4 @@ int token_final(Estado estado);
 
 ClasseEntrada classifica_caractere(char entrada);
 
-#endif // TABELA_TRANSICAO_
+#endif // TABELA_TRANSICAO_H

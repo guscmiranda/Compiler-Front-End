@@ -151,7 +151,7 @@ void inicializa_tabela()
     for (int c = 0; c < NUM_CLASSES; c++)
         tabela_transicao[ST_AG][c] = ST_AF;
 
-    tabela_transicao[ST_AF][CLS_BARRA] = ST_AH;
+    tabela_transicao[ST_AG][CLS_BARRA] = ST_AH; // Aqui estava AF[ST_AG][CLS_BARRA]
 
     /* Estado H é de aceitação */
 
@@ -302,7 +302,7 @@ ClasseEntrada classifica_caractere(char entrada)
         return CLS_PONTO;
 
     if (isSeparador(entrada))
-        return CLS_SEPARADOR;
+        return CLS_SEPARADOR; 
 
     return CLS_OUTROS;
 }
