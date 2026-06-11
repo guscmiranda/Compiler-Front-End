@@ -35,13 +35,13 @@ void inicializa_tabela()
     tabela_transicao[ST_A][CLS_DOIS_PONTOS] = ST_E;
     tabela_transicao[ST_A][CLS_VIRGULA] = ST_F;
     tabela_transicao[ST_A][CLS_MAIS] = ST_G;
-    tabela_transicao[ST_A][CLS_ASTERISCO] = ST_H;
+    tabela_transicao[ST_A][CLS_ASTERISCO] = ST_q0;
     tabela_transicao[ST_A][CLS_APOSTROFO] = ST_I;
     tabela_transicao[ST_A][CLS_DIGITO] = ST_J;
     tabela_transicao[ST_A][CLS_PONTO_VIRGULA] = ST_K;
-    tabela_transicao[ST_A][CLS_IGUAL] = ST_L;
+    tabela_transicao[ST_A][CLS_IGUAL] = ST_q1;
     tabela_transicao[ST_A][CLS_MENOS] = ST_M;
-    tabela_transicao[ST_A][CLS_BARRA] = ST_N;
+    tabela_transicao[ST_A][CLS_BARRA] = ST_q2;
     tabela_transicao[ST_A][CLS_MENOR] = ST_O;
     tabela_transicao[ST_A][CLS_MAIOR] = ST_P;
     tabela_transicao[ST_A][CLS_Ee] = ST_B;
@@ -206,6 +206,11 @@ void inicializa_finais()
 int is_estado_final(int estado)
 {
     return estado_final[estado] != TK_NULO;
+}
+
+int token_final(Estado estado)
+{
+    return estado_final[estado];
 }
 
 void inicializa_lookahead()

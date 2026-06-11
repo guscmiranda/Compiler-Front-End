@@ -96,6 +96,7 @@ Estado estado_inicial();
 Estado move(int estado, int classe);
 int is_estado_final(int estado);
 int needs_lookahead(int estado);
+int token_final(Estado estado);
 
 ClasseEntrada classifica_caractere(char entrada);
 
