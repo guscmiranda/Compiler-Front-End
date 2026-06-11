@@ -35,6 +35,7 @@ typedef enum // enum já atribui valores de 0 em diante automaticamente
     TK_PASSO,
     TK_COMENTARIO, // 30
     TK_SEPARADOR,  // comentário e separador são ignorados
+    TK_EOF,
     NUM_TOKENS
 } TokenType;
 
