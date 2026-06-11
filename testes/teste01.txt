@@ -1,13 +1,13 @@
 int programa ()
     inicio
         
-        /* declarações de variáveis */
+        /* declaracoes de variaveis */
         
         int x, y, z, i;
         float a, b, c;
         char c;
         
-        /* expressões aritméticas */
+        /* expressoes aritmeticas */
         
         x = 3 / 2;
         y = c**2;
@@ -15,18 +15,18 @@ int programa ()
         b = 0.1E-2;
         c = 'A';
         
-        /* comandos de seleção */
+        /* comandos de selecao */
         
-        se(1 < 2) então
+        se(1 < 2) entao
             z = 1;
-        e_se(1==1) então
+        e_se(1==1) entao
             inicio
                 z= 2;
             fim
         senao
             c = 'a';
 
-        /* comandos de repetição */
+        /* comandos de repeticao */
         
         enquanto(x <> 1) faca
             inicio
