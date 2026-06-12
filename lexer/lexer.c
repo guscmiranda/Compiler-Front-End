@@ -23,9 +23,6 @@ void inicializa_lexer(FILE *codigo_fonte)
     coluna_atual = 1;
 }
 
-// falta get next token no lexer.c, tem que ler o arquivo e usar a tabela de transicao pra gerar os
-// tokens e usar a funcao verifica_palavra_reservada pra diferenciar id de palavra reservada
-
 static TokenType verifica_palavra_reservada(const char *lexema)
 {
     // tipo
@@ -160,18 +157,18 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
 {
 
     Token token;
-
     int tamanho_lexema = strlen(lexema);
+
+    if (!is_estado_final(s))
+    {
+        lexema[tamanho_lexema] = '\0';
+        lex_error(linha_atual, coluna_atual, lexema); // Criar outra função paar esse erro
+    }
 
     if (s == ST_ERRO)
     {
         lexema[tamanho_lexema] = '\0';
-        // chama função de erro
-        token.tipo = TK_NULO;
-        token.linha = token_linha;
-        token.coluna = token_coluna;
         lex_error(linha_atual, coluna_atual, lexema);
-        return token;
     }
 
     trata_lookahead(s, lexema, &tamanho_lexema);
@@ -182,9 +179,11 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
     if (tipo == TK_ID)
     {
         tipo = verifica_palavra_reservada(lexema);
+
         if (tipo == TK_ID)
         {
-            sprintf(token.atributo, "%d", indice_simbolo(lexema));
+            int idx = indice_simbolo(TK_ID, lexema, "\0");
+            sprintf(token.atributo, "%d", idx);
         }
         else
         {
@@ -192,9 +191,25 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
         }
     }
     else if (tipo == TK_RELOP)
-    {
-        // Para relop, o atributo é o próprio lexema (==, !=, <, >, <=, >=)
+    { // Para relop, o atributo é o próprio lexema (==, !=, <, >, <=, >=)
         strcpy(token.atributo, lexema);
+    }
+    else if (tipo == TK_NUM)
+    { // Adicionar NUM com o tipo na tabela de simbolos
+        char tipo_dado[20] = "";
+
+        if (s == ST_T)
+            strcpy(tipo_dado, "int");
+        else if (s == ST_AC)
+            strcpy(tipo_dado, "float");
+
+        int idx = indice_simbolo(TK_NUM, lexema, tipo_dado);
+        sprintf(token.atributo, "%d", idx);
+    }
+    else if (tipo == TK_CHAR_CONTEUDO)
+    {
+        int idx = indice_simbolo(TK_CHAR_CONTEUDO, lexema, "char");
+        sprintf(token.atributo, "%d", idx);
     }
     else
     {

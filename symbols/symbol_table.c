@@ -1,17 +1,17 @@
 #include "symbol_table.h"
-#define MAX_SYMBOLS 100
+#include <stdio.h>
 
 SymbolTable symbol_table[MAX_SYMBOLS]; // Tabela de símbolos
 int num_simbolos = 0;                  // Número de símbolos na tabela
 
-int indice_simbolo(char *lexema)
+int indice_simbolo(TokenType tipo, char *lexema, char *tipo_dado) // temos que inserir o tipo em NUM e ChAR_CONTEUDO
 {
     // Verificar se o símbolo já existe na tabela
     int indice = busca_simbolo(lexema);
     if (indice == -1)
     {
         // Se não existir, insere e retorna o novo índice
-        return insere_simbolo(TK_ID, lexema);
+        return insere_simbolo(tipo, lexema, tipo_dado);
     }
     else
     {
@@ -32,15 +32,26 @@ int busca_simbolo(char *lexema)
     return -1; // Símbolo não encontrado
 }
 
-int insere_simbolo(TokenType tipo, char *lexema)
+int insere_simbolo(TokenType tipo, char *lexema, char *tipo_dado)
 {
     if (num_simbolos < MAX_SYMBOLS)
     {
-        symbol_table[num_simbolos].tipo = tipo;
+        symbol_table[num_simbolos].tipo_token = tipo;
         strcpy(symbol_table[num_simbolos].lexema, lexema);
+        strcpy(symbol_table[num_simbolos].tipo_dado, tipo_dado);
+
         // Inicialmente, o tipo de dado não é especificado
-        symbol_table[num_simbolos].tipo_dado[0] = '\0';
+        // symbol_table[num_simbolos].tipo_dado[0] = '\0';
         return num_simbolos++;
     }
     return -1; // Tabela de símbolos cheia
+}
+
+void print_symbol_table()
+{
+    printf("\n== TABELA DE SIMBOLOS ==\n");
+    for (int i = 0; i < num_simbolos; i++)
+    {
+        printf("Pos: %-2d | Token: %-2d | Tipo de dado: %-5s |Lexema: %s\n", i, symbol_table[i].tipo_token, symbol_table[i].tipo_dado, symbol_table[i].lexema);
+    }
 }

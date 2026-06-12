@@ -1,5 +1,6 @@
-#include "lexer/lexer.h"
 #include "lexer/tabela_transicao.h"
+#include "symbols/symbol_table.h"
+#include "lexer/lexer.h"
 #include <stdio.h>
 
 int main()
@@ -39,6 +40,8 @@ int main()
     {
         printf("Token: %-5d | Atributo: %-5s | Linha: %-3d | Coluna: %-3d\n", tokens[j].tipo, tokens[j].atributo, tokens[j].linha, tokens[j].coluna);
     }
+
+    print_symbol_table();
 
     fclose(arquivo);
 

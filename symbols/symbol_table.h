@@ -14,15 +14,18 @@ já que o lexer é o responsável por preencher a tabela de símbolos. */
 #include "../token/token.h"
 #include <string.h>
 
+#define MAX_SYMBOLS 100
+
 typedef struct
 {
-    TokenType tipo;
+    TokenType tipo_token;
     char lexema[100];
     char tipo_dado[20]; // int, float, ...
 } SymbolTable;
 
-int indice_simbolo(char *lexema);
+int indice_simbolo(TokenType tipo, char *lexema, char *tipo_dado);
 int busca_simbolo(char *lexema);
-int insere_simbolo(TokenType tipo, char *lexema);
+int insere_simbolo(TokenType tipo, char *lexema, char *tipo_dado);
+void print_symbol_table();
 
 #endif
