@@ -128,10 +128,9 @@ Token get_next_token()
         int is_eof = (c == EOF);
 
         conta_linha_e_coluna(c); // Atualizar linha e coluna
-        // if (!is_eof && c != '\r')
         lexema[i++] = c;
 
-        if (is_eof /*&& s == estado_inicial()*/)
+        if (is_eof)
         {
             if (s == estado_inicial())
             {
@@ -142,27 +141,21 @@ Token get_next_token()
                 c = ' ';
             }
         }
-        // se o eof é lookahead temos q tratar num else ??
 
         ClasseEntrada classe = classifica_caractere(c);
         s = move(s, classe);
     }
 
-    // return acoes(s, lexema, token_linha, token_coluna);
     Token token_atual = acoes(s, lexema, token_linha, token_coluna);
 
     if (token_atual.tipo == TK_SEPARADOR || token_atual.tipo == TK_COMENTARIO)
     {
-        // repetir, talvez devesemos colocar tudo dentro de outro while
-        // aí colocava um continue;
         token_atual = get_next_token();
     }
 
     return token_atual;
 }
 
-// Considera que EOF é tratado no while
-// Acho que não trata RELOP de acordo...
 Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
 {
 
@@ -171,12 +164,13 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
     int tamanho_lexema = strlen(lexema);
 
     if (s == ST_ERRO)
-    { // Conferir
+    {
         lexema[tamanho_lexema] = '\0';
         // chama função de erro
         token.tipo = TK_NULO;
         token.linha = token_linha;
         token.coluna = token_coluna;
+        lex_error(linha_atual, coluna_atual, lexema);
         return token;
     }
 
@@ -189,9 +183,7 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
     {
         tipo = verifica_palavra_reservada(lexema);
         if (tipo == TK_ID)
-        { // se for id, tem que verificar se o lexema pertence à tabela de símbolos
-            // token.atributo[0] = 48 + indice_simbolo(lexema);
-            // token.atributo[1] = '\0';
+        {
             sprintf(token.atributo, "%d", indice_simbolo(lexema));
         }
         else
@@ -206,11 +198,8 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
     }
     else
     {
-        // Para outros tokens, o atributo é o próprio lexema (ex: número, char)
         strcpy(token.atributo, "\0");
     }
-
-    // strcpy(token.atributo, lexema);
 
     token.tipo = tipo;
     token.linha = token_linha;
