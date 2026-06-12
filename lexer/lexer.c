@@ -6,8 +6,8 @@
 #include "../utils/error.h"
 #include "lexer.h"
 
-int linha_atual = 1;
-int coluna_atual = 1;
+int linha_atual;
+int coluna_atual;
 int coluna_anterior = 1;
 FILE *arquivo = NULL;
 
@@ -19,6 +19,8 @@ void inicializa_lexer(FILE *codigo_fonte)
 {
     arquivo = codigo_fonte;
     inicializa_tabela_transicao();
+    linha_atual = 1;
+    coluna_atual = 1;
 }
 
 // falta get next token no lexer.c, tem que ler o arquivo e usar a tabela de transicao pra gerar os
@@ -153,6 +155,7 @@ Token get_next_token()
     {
         // repetir, talvez devesemos colocar tudo dentro de outro while
         // aí colocava um continue;
+        token_atual = get_next_token();
     }
 
     return token_atual;
@@ -187,8 +190,13 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
         tipo = verifica_palavra_reservada(lexema);
         if (tipo == TK_ID)
         { // se for id, tem que verificar se o lexema pertence à tabela de símbolos
-            token.atributo[0] = 48 + indice_simbolo(lexema);
-            token.atributo[1] = '\0';
+            // token.atributo[0] = 48 + indice_simbolo(lexema);
+            // token.atributo[1] = '\0';
+            sprintf(token.atributo, "%d", indice_simbolo(lexema));
+        }
+        else
+        {
+            strcpy(token.atributo, "\0");
         }
     }
     else if (tipo == TK_RELOP)
