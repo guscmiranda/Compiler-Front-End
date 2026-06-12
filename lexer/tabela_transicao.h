@@ -49,12 +49,15 @@ typedef enum
     ST_E,
     ST_F,
     ST_G,
+    ST_q0,
     ST_H,
     ST_I,
     ST_J,
     ST_K,
+    ST_q1,
     ST_L,
     ST_M,
+    ST_q2,
     ST_N,
     ST_O,
     ST_P,
@@ -77,15 +80,13 @@ typedef enum
     ST_AG,
     ST_AH,
     ST_AI,
+    ST_ERRO, // 38
     ST_AJ,
     ST_AK,
     ST_AL,
-    ST_q0,
-    ST_q1,
-    ST_q2,
     NUM_ESTADOS,
 
-    ST_ERRO = -1,
+    // ST_ERRO = -1,
 
 } Estado;
 
