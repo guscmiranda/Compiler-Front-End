@@ -42,8 +42,8 @@ typedef enum // enum já atribui valores de 0 em diante automaticamente
 typedef struct
 {
     TokenType tipo;
-    char lexema[100]; // valor do atributo
-    int indice;       // indice na tabela de símbolos, se aplicável
+    char atributo[100]; // valor do atributo
+    // int indice;         // indice na tabela de símbolos, se aplicável
     int linha;
     int coluna;
 
