@@ -9,6 +9,7 @@ bin/
 
 # VS Code
 .vscode/
+.idea/
 
 # Sistema
 .DS_Store
