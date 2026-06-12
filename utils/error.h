@@ -7,6 +7,6 @@ arquivo separado para isso, onde podemos definir as mensagens de erro e as funç
 #define ERROR_H
 
 void lex_error(int linha, int colun, const char *lexema_inavelido);
-
+void exe_error(int linha, int coluna, const char *lexema);
 #endif 
 

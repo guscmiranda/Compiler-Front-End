@@ -162,7 +162,7 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
     if (!is_estado_final(s))
     {
         lexema[tamanho_lexema] = '\0';
-        lex_error(linha_atual, coluna_atual, lexema); // Criar outra função paar esse erro
+        exe_error(linha_atual, coluna_atual, lexema); // Criar outra função paar esse erro
     }
 
     if (s == ST_ERRO)
