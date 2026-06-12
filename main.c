@@ -15,7 +15,7 @@ int main()
         printf("Arquivo lido com sucesso\n");
     }
 
-    Token tokens[100]; // Array para armazenar os tokens gerados
+    Token tokens[500]; // Array para armazenar os tokens gerados
 
     inicializa_lexer(arquivo);
     int i = 0;
@@ -29,6 +29,7 @@ int main()
         }
         else
         {
+            // printf("leu com i = %d", i);
             // printf("Token: %-5d| Atributo: %-5s| Linha: %-3d| Coluna: %-3d\n", tokens[i].tipo, tokens[i].atributo, tokens[i].linha, tokens[i].coluna);
         }
         i++;
@@ -36,7 +37,7 @@ int main()
 
     for (int j = 0; j < i; j++)
     {
-        printf("Token: %d | Atributo: %s | Linha: %d | Coluna: %d\n", tokens[j].tipo, tokens[j].atributo, tokens[j].linha, tokens[j].coluna);
+        printf("Token: %-5d | Atributo: %-5s | Linha: %-3d | Coluna: %-3d\n", tokens[j].tipo, tokens[j].atributo, tokens[j].linha, tokens[j].coluna);
     }
 
     fclose(arquivo);
