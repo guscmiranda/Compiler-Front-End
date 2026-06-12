@@ -5,7 +5,7 @@ int programa ()
         
         int x, y, z, i;
         float a, b, c;
-        char c;
+        char d;
         
         /* expressoes aritmeticas */
         
