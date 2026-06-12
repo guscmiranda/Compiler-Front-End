@@ -257,7 +257,7 @@ void inicializa_finais()
 
 int is_estado_final(int estado)
 {
-    return estado_final[estado] != TK_NULO;
+    return estado_final[estado] != TK_NULO || estado == ST_ERRO;
 }
 
 int token_final(Estado estado)
