@@ -15,15 +15,29 @@ int main()
         printf("Arquivo lido com sucesso\n");
     }
 
-    // inicializa_tabela_transicao();
+    Token tokens[100]; // Array para armazenar os tokens gerados
+
     inicializa_lexer(arquivo);
     int i = 0;
-    while(i < 20){
-        get_next_token();
+    do
+    {
+        tokens[i] = get_next_token();
+        if (tokens[i].tipo == TK_NULO)
+        {
+            printf("Token de erro encontrado em linha %d, coluna %d.\n", tokens[i].linha, tokens[i].coluna);
+            break;
+        }
+        else
+        {
+            // printf("Token: %-5d| Atributo: %-5s| Linha: %-3d| Coluna: %-3d\n", tokens[i].tipo, tokens[i].atributo, tokens[i].linha, tokens[i].coluna);
+        }
         i++;
-    }
+    } while (tokens[i - 1].tipo != TK_EOF);
 
-    // se for ID, tem que verificar se o lexema pertence à tabela de palvras reservadas
+    for (int j = 0; j < i; j++)
+    {
+        printf("Token: %d | Atributo: %s | Linha: %d | Coluna: %d\n", tokens[j].tipo, tokens[j].atributo, tokens[j].linha, tokens[j].coluna);
+    }
 
     fclose(arquivo);
 
