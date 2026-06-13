@@ -86,8 +86,6 @@ typedef enum
     ST_AL,
     NUM_ESTADOS,
 
-    // ST_ERRO = -1,
-
 } Estado;
 
 #define N_ESTADOS NUM_ESTADOS + 1

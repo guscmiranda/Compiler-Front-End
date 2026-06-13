@@ -7,11 +7,9 @@
 #include "../token/token.h"
 #include "tabela_transicao.h"
 #include <stdio.h>
-// Token get_next_token();
 
 void inicializa_lexer(FILE *codigo_fonte);
 Token get_next_token();
 Token acoes(Estado s, char *lexema, int token_linha, int token_coluna);
-// Token acao(char *lexema, int );
 
-#endif // LEXER_H
+#endif 

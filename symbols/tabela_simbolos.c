@@ -4,7 +4,7 @@
 SymbolTable symbol_table[MAX_SYMBOLS]; // Tabela de símbolos
 int num_simbolos = 0;                  // Número de símbolos na tabela
 
-int indice_simbolo(TokenType tipo, char *lexema, char *tipo_dado) // temos que inserir o tipo em NUM e ChAR_CONTEUDO
+int indice_simbolo(TokenType tipo, char *lexema, char *tipo_dado) 
 {
     // Verificar se o símbolo já existe na tabela
     int indice = busca_simbolo(lexema);
@@ -40,8 +40,6 @@ int insere_simbolo(TokenType tipo, char *lexema, char *tipo_dado)
         strcpy(symbol_table[num_simbolos].lexema, lexema);
         strcpy(symbol_table[num_simbolos].tipo_dado, tipo_dado);
 
-        // Inicialmente, o tipo de dado não é especificado
-        // symbol_table[num_simbolos].tipo_dado[0] = '\0';
         return num_simbolos++;
     }
     return -1; // Tabela de símbolos cheia

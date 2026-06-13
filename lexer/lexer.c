@@ -97,7 +97,7 @@ void trata_lookahead(Estado s, char *lexema, int *tamanho_lexema)
     (*tamanho_lexema)--;
     char lookahead_char = lexema[*tamanho_lexema];
 
-    // Devolve caractere e volta o ponteiro (conferir!)
+    // Devolve caractere e volta o ponteiro
     ungetc(lookahead_char, arquivo);
 
     if (lookahead_char == '\n')
@@ -162,7 +162,7 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
     if (!is_estado_final(s))
     {
         lexema[tamanho_lexema] = '\0';
-        exe_error(linha_atual, coluna_atual, lexema); // Criar outra função paar esse erro
+        exe_error(linha_atual, coluna_atual, lexema); 
     }
 
     if (s == ST_ERRO)
@@ -199,7 +199,7 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
         strcpy(token.atributo, lexema);
     }
     else if (tipo == TK_NUM)
-    { // Adicionar NUM com o tipo na tabela de simbolos
+    { 
         char tipo_dado[20] = "";
 
         if (s == ST_T)
