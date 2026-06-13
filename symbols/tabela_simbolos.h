@@ -8,8 +8,8 @@
 /* Tenho minhas duvidas se isso merece um arquivo separado, ou se é só uma estrutura que fica dentro do lexer mesmo,
 já que o lexer é o responsável por preencher a tabela de símbolos. */
 
-#ifndef SYMBOL_TABLE_H
-#define SYMBOL_TABLE_H
+#ifndef TABELA_SIMBOLOS_H
+#define TABELA_SIMBOLOS_H
 
 #include "../token/token.h"
 #include <string.h>

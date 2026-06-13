@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "../symbols/symbol_table.h"
+#include "../symbols/tabela_simbolos.h"
 #include "tabela_transicao.h"
 #include "../utils/error.h"
 #include "lexer.h"
@@ -115,13 +115,13 @@ Token get_next_token()
     char lexema[100] = {0}; // buffer para construir o lexema
     int i = 0;
 
-    // Para reportar erro, informar onde o token está exatamente
+    // Para reportar, informar onde o token está exatamente
     int token_linha = linha_atual;
     int token_coluna = coluna_atual;
 
     while (!is_estado_final(s))
     {
-        char c = fgetc(arquivo); // fazer get_next_char() ?
+        char c = fgetc(arquivo);
         int is_eof = (c == EOF);
 
         conta_linha_e_coluna(c); // Atualizar linha e coluna
@@ -184,6 +184,10 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
         {
             int idx = indice_simbolo(TK_ID, lexema, "\0");
             sprintf(token.atributo, "%d", idx);
+        }
+        else if (tipo == TK_TIPO)
+        {
+            strcpy(token.atributo, lexema);
         }
         else
         {

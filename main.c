@@ -1,5 +1,5 @@
 #include "lexer/tabela_transicao.h"
-#include "symbols/symbol_table.h"
+#include "symbols/tabela_simbolos.h"
 #include "lexer/lexer.h"
 #include <stdio.h>
 

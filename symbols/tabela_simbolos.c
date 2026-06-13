@@ -1,4 +1,4 @@
-#include "symbol_table.h"
+#include "tabela_simbolos.h"
 #include <stdio.h>
 
 SymbolTable symbol_table[MAX_SYMBOLS]; // Tabela de símbolos
