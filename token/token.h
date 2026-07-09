@@ -49,4 +49,6 @@ typedef struct
 
 } Token;
 
+char *token_type_to_string(TokenType tipo);
+
 #endif
