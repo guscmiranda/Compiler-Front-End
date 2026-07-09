@@ -109,6 +109,50 @@ void trata_lookahead(Estado s, char *lexema, int *tamanho_lexema)
         coluna_atual--;
 }
 
+// Token get_next_token()
+// {
+//     Estado s = estado_inicial();
+//     char lexema[100] = {0}; // buffer para construir o lexema
+//     int i = 0;
+
+//     // Para reportar, informar onde o token está exatamente
+//     int token_linha = linha_atual;
+//     int token_coluna = coluna_atual;
+
+//     while (!is_estado_final(s))
+//     {
+//         char c = fgetc(arquivo);
+//         int is_eof = (c == EOF);
+
+//         conta_linha_e_coluna(c); // Atualizar linha e coluna
+//         lexema[i++] = c;
+
+//         if (is_eof)
+//         {
+//             if (s == estado_inicial())
+//             {
+//                 return (Token){.tipo = TK_EOF, .atributo = "\0", .linha = linha_atual, .coluna = coluna_atual + 1};
+//             }
+//             else
+//             {
+//                 c = ' ';
+//             }
+//         }
+
+//         ClasseEntrada classe = classifica_caractere(c);
+//         s = move(s, classe);
+//     }
+
+//     Token token_atual = acoes(s, lexema, token_linha, token_coluna);
+
+//     if (token_atual.tipo == TK_SEPARADOR || token_atual.tipo == TK_COMENTARIO)
+//     {
+//         token_atual = get_next_token();
+//     }
+
+//     return token_atual;
+// }
+
 Token get_next_token()
 {
     Estado s = estado_inicial();
@@ -124,9 +168,6 @@ Token get_next_token()
         char c = fgetc(arquivo);
         int is_eof = (c == EOF);
 
-        conta_linha_e_coluna(c); // Atualizar linha e coluna
-        lexema[i++] = c;
-
         if (is_eof)
         {
             if (s == estado_inicial())
@@ -135,8 +176,24 @@ Token get_next_token()
             }
             else
             {
-                c = ' ';
+                // Erro: EOF alcançado no meio da formação de um token.
+                // Fecha a string do lexema para não imprimir lixo de memória
+                lexema[i] = '\0';
+
+                // Dispara o erro léxico apropriado
+                lex_error(token_linha, token_coluna, "Erro: Fim de arquivo inesperado. Comentario nao fechado?");
+
+                // Força o retorno de um EOF para sair do loop e evitar crash
+                return (Token){.tipo = TK_EOF, .atributo = "\0", .linha = linha_atual, .coluna = coluna_atual};
             }
+        }
+
+        conta_linha_e_coluna(c); // Atualizar linha e coluna
+
+        // Proteção de segurança: evita estourar o buffer caso o token seja muito longo
+        if (i < 99)
+        {
+            lexema[i++] = c;
         }
 
         ClasseEntrada classe = classifica_caractere(c);
@@ -162,7 +219,7 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
     if (!is_estado_final(s))
     {
         lexema[tamanho_lexema] = '\0';
-        exe_error(linha_atual, coluna_atual, lexema); 
+        exe_error(linha_atual, coluna_atual, lexema);
     }
 
     if (s == ST_ERRO)
@@ -199,7 +256,7 @@ Token acoes(Estado s, char *lexema, int token_linha, int token_coluna)
         strcpy(token.atributo, lexema);
     }
     else if (tipo == TK_NUM)
-    { 
+    {
         char tipo_dado[20] = "";
 
         if (s == ST_T)
