@@ -6,9 +6,11 @@ arquivo separado para isso, onde podemos definir as mensagens de erro e as funç
 #ifndef ERROR_H
 #define ERROR_H
 
-void lex_error(int linha, int colun, const char *lexema);
-void exe_error(int linha, int coluna, const char *lexema);
+#include "../token/token.h"
 
-// TODO: Implementar função para tratar erros de sintaxe
-void syn_error(int linha, int coluna, const char *lexema);
+void lex_error(int linha, int coluna, const char *lexema);
+void exe_error(int linha, int coluna, const char *lexema);
+void syn_error(Token tk, TokenType tk_esperado);
+void syn_error_first(Token tk, TokenType *esperados, int n);
+
 #endif
