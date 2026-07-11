@@ -3,9 +3,9 @@ int programa ()
         
         /* declaracoes de variaveis */
         
-        int x, y, z, i;
-        float a, b, c;
-        char d;
+        int: x, y, z, i;
+        float: a, b, c;
+        char: d;
         
         /* expressoes aritmeticas */
         
@@ -30,7 +30,8 @@ int programa ()
         
         enquanto(x <> 1) faca
             inicio
-                char z = 'c';
+                char: z;
+                z = 'c';
             fim
 
         repita
