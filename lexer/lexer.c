@@ -109,7 +109,7 @@ void trata_lookahead(Estado s, char *lexema, int *tamanho_lexema)
         coluna_atual--;
 }
 
-Token get_next_token()
+Token lex()
 {
     Estado s = estado_inicial();
     char lexema[100] = {0}; // buffer para construir o lexema
@@ -125,10 +125,12 @@ Token get_next_token()
         int is_eof = (c == EOF);
 
         conta_linha_e_coluna(c); // Atualizar linha e coluna
-
-        if (i < 99) lexema[i++] = c;
-        else lex_error(token_linha, token_coluna, "Erro: lexema maior que o limite de 100 caracteres");
-
+        
+        if( s != ST_AF && s != ST_AG ){
+            if (i < 99) lexema[i++] = c;
+            else lex_error(token_linha, token_coluna, "Erro: lexema maior que o limite de 100 caracteres");
+        }
+        
         if (is_eof)
         {
             if (s == estado_inicial() || s == ST_AI) // Estado inicial ou separador
@@ -149,8 +151,6 @@ Token get_next_token()
             }
         }
 
-       
-
         ClasseEntrada classe = classifica_caractere(c);
         s = move(s, classe);
     }
@@ -159,7 +159,7 @@ Token get_next_token()
 
     if (token_atual.tipo == TK_SEPARADOR || token_atual.tipo == TK_COMENTARIO)
     {
-        token_atual = get_next_token();
+        token_atual = lex();
     }
 
     return token_atual;

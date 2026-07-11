@@ -39,7 +39,7 @@ int main()
             tokens = temp;
         }
 
-        tokens[quantidade] = get_next_token();
+        tokens[quantidade] = lex();
 
         quantidade++;
     } while (tokens[quantidade - 1].tipo != TK_EOF);

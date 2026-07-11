@@ -9,7 +9,7 @@
 #include <stdio.h>
 
 void inicializa_lexer(FILE *codigo_fonte);
-Token get_next_token();
+Token lex();
 Token acoes(Estado s, char *lexema, int token_linha, int token_coluna);
 
 #endif 
