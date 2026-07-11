@@ -20,7 +20,7 @@ Token tk_atual;
 
 No *parser()
 {
-    tk_atual = lex();
+    tk_atual = lexer();
 
     No *raiz = call();
 
@@ -33,7 +33,7 @@ void match(TokenType tk_esperado)
 {
     if (tk_atual.tipo == tk_esperado)
     {
-        tk_atual = lex();
+        tk_atual = lexer();
     }
     else
     {

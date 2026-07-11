@@ -39,7 +39,7 @@ int main()
             tokens = temp;
         }
 
-        tokens[quantidade] = lex();
+        tokens[quantidade] = lexer();
 
         quantidade++;
     } while (tokens[quantidade - 1].tipo != TK_EOF);

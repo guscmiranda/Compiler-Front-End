@@ -109,7 +109,7 @@ void trata_lookahead(Estado s, char *lexema, int *tamanho_lexema)
         coluna_atual--;
 }
 
-Token lex()
+Token lexer()
 {
     Estado s = estado_inicial();
     char lexema[100] = {0}; // buffer para construir o lexema
@@ -139,11 +139,11 @@ Token lex()
             }
             else if (s == ST_AF || s == ST_AG) // Comentário
             {
-                lex_error(token_linha, token_coluna, "Erro: Fim de arquivo inesperado. Comentario nao fechado?");
+                lex_error(token_linha, token_coluna, "fim de arquivo inesperado. Comentario nao fechado?");
             }
             else if (s == ST_I || s == ST_AJ) // Conteúdo char
             {
-                lex_error(token_linha, token_coluna, "Erro: Fim de arquivo inesperado. Conteudo de char nao fechado?");
+                lex_error(token_linha, token_coluna, "fim de arquivo inesperado. Conteudo de char nao fechado?");
             }
             else
             {
@@ -159,7 +159,7 @@ Token lex()
 
     if (token_atual.tipo == TK_SEPARADOR || token_atual.tipo == TK_COMENTARIO)
     {
-        token_atual = lex();
+        token_atual = lexer();
     }
 
     return token_atual;
